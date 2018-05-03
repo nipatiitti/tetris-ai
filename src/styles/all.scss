@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'components/all';
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.root-container {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+  font-family: "Roboto"; // TODO
+  background-color: whitesmoke;
+}
+
+.container {
+  max-width: 800px;
+  margin: 1em auto 0 auto;
+}
+
+.withoutDecoration {
+  /* Class which overrides styles of <Link> */
+  text-decoration: none;
+  color: inherit;
+}
