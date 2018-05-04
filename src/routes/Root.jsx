@@ -13,15 +13,15 @@ import { Provider } from 'react-redux'
 
 import history from './history'
 
-import Header from '../containers/HeaderContainer'
+import Game from '../components/Game'
 
-const Root = ({ store }) => (
+const Root = ({ store, persistor }) => (
   <Provider store={store}>
     <PersistGate loading={<h1>Loading</h1>} persistor={persistor}>
       <Router history={history}>
         <div className="root-container">
           <Switch>
-            <Route exact path='/' component={<Header />} />
+            <Route exact path='/' component={Game} />
           </Switch>
         </div>
       </Router>

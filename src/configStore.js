@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 import main from './reducers/main'
 
 const persistConfig = {
-  key: 'NAMEHERE_root',
+  key: 'tetris_ai_rootSs',
   storage,
   blacklist: []
 }

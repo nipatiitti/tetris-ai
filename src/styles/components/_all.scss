@@ -1,3 +1,38 @@
-@import "header";
-
 @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css');
+
+
+.game {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.next {
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(4, 35px);
+    grid-template-rows: repeat(4, 35px);
+}
+
+.grid {
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(10, 35px);
+    grid-template-rows: repeat(20, 35px);
+}
+
+.gridElement {
+    height: 35px;
+    width: 35px;
+
+    &.fill {
+        background-color: black;
+    }
+
+    &.nofill {
+        background-color: antiquewhite;
+    }
+}
