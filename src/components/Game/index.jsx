@@ -299,6 +299,122 @@ class Game extends Component {
         })
     }
 
+    t_t = () => {
+        const {id, map} = this.state
+        let newMap = map
+        let blocks = this.getBlocks( id, map )
+
+        if(blocks[0].f_state === 0) {
+            try {
+                const c_y = blocks[0].y
+                const c_x = blocks[0].x
+                if (map[c_y][c_x-1].state === 1 || map[c_y+1][c_x].state === 1) {
+                    return
+                }
+            } catch ( e ) {
+                return
+            }
+
+            for (let i = 0; i < blocks.length; i++) {
+                let block = blocks[i];
+                const x = block.x
+                const y = block.y
+
+                if(i === 1) {
+                    let oldBlock = newMap[y+2][x-1]
+                    newMap[y+2][x-1] = Object.assign({}, block, {x: oldBlock.x, y: oldBlock.y, f_state: 1})
+                    newMap[y][x] = Object.assign({}, block, {state: 0, id: ""})
+                } else if(i === 3) {
+                    let oldBlock = newMap[y+1][x]
+                    newMap[y+1][x] = Object.assign({}, block, {x: oldBlock.x, y: oldBlock.y, f_state: 1})
+                    newMap[y][x] = Object.assign({}, block, {state: 0, id: ""})
+                } else {
+                    newMap[y][x] = Object.assign({}, block, {f_state: 1})
+                }
+                
+            }
+        } else if(blocks[0].f_state === 1) {
+            try {
+                const c_y = blocks[0].y-1
+                const c_x = blocks[0].x+1
+                if (map[c_y][c_x].state === 1) {
+                    return
+                }
+            } catch ( e ) {
+                return
+            }
+
+            for (let i = 0; i < blocks.length; i++) {
+                let block = blocks[i];
+                const x = block.x
+                const y = block.y
+
+                if(i === 0) {
+                    let oldBlock = newMap[y-1][x+1]
+                    newMap[y-1][x+1] = Object.assign({}, block, {x: oldBlock.x, y: oldBlock.y, f_state: 2})
+                    newMap[y][x] = Object.assign({}, block, {state: 0, id: ""})
+                } else {
+                    newMap[y][x] = Object.assign({}, block, {f_state: 2})
+                }
+                
+            } 
+        } else if(blocks[0].f_state === 2) {
+            try {
+                const c_y = blocks[0].y+1
+                const c_x = blocks[0].x-1
+                if (map[c_y][c_x].state === 1) {
+                    return
+                }
+            } catch ( e ) {
+                return
+            }
+
+            for (let i = 0; i < blocks.length; i++) {
+                let block = blocks[i];
+                const x = block.x
+                const y = block.y
+
+                if(i === 2) {
+                    let oldBlock = newMap[y+1][x+1]
+                    newMap[y+1][x+1] = Object.assign({}, block, {x: oldBlock.x, y: oldBlock.y, f_state: 3})
+                    newMap[y][x] = Object.assign({}, block, {state: 0, id: ""})
+                } else {
+                    newMap[y][x] = Object.assign({}, block, {f_state: 3})
+                }
+                
+            } 
+        } else if(blocks[0].f_state === 3) {
+            try {
+                const c_y = blocks[0].y-1
+                const c_x = blocks[0].x-1
+                if (map[c_y][c_x].state === 1) {
+                    return
+                }
+            } catch ( e ) {
+                return
+            }
+
+            for (let i = 0; i < blocks.length; i++) {
+                let block = blocks[i];
+                const x = block.x
+                const y = block.y
+
+                if(i === 3) {
+                    let oldBlock = newMap[y+1][x-1]
+                    newMap[y+1][x-1] = Object.assign({}, block, {x: oldBlock.x, y: oldBlock.y, f_state: 0})
+                    newMap[y][x] = Object.assign({}, block, {state: 0, id: ""})
+                } else {
+                    newMap[y][x] = Object.assign({}, block, {f_state: 0})
+                }
+                
+            } 
+        }
+
+        this.setState({
+            map: newMap
+        })
+    }
+
     down = () => {
         const { id, map} = this.state
         let newMap = map
@@ -450,7 +566,11 @@ class Game extends Component {
             case "i":
                 this.t_i()
                 break;
-        
+    
+            case "t":
+                this.t_t()
+                break;
+
             default:
                 break;
         }
